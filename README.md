@@ -7,4 +7,9 @@ The docker image requires you have an ssh key generated and allowed and stored n
 
 `ssh-keygen -q -t rsa -N "" -f id_rsa`
 
+# TODO
 
+* add repository link and key link as an arguments to the build process
+* find some way to make it less prone to problems in the future when new version of php-fpm gets released (remove specific version dependencies or enforce it everywhere)
+* make indexing work (mounted fs from Windows does not seem to work well)
+* make searchd work (gives buffer overflow)
