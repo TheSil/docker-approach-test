@@ -4,7 +4,7 @@ FROM ubuntu:latest as run_stage
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
   apt-get install --no-install-recommends -y \   
-  libevent-dev flex libxml2-dev libopenmpi-dev nginx php-fpm php-curl ssh 
+  libevent-dev flex libxml2-dev libopenmpi-dev nginx php-fpm php-curl ssh libfl2 
   
 FROM run_stage as install_stage
 
