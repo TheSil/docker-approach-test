@@ -10,7 +10,7 @@ FROM run_stage as install_stage
 
 # intstall additional dependencies required for install only
 RUN apt-get install --no-install-recommends -y \   
-  git g++ cmake bison libz-dev libevent-dev wget python3 ca-certificates libfl-dev
+  git g++ cmake bison libz-dev libevent-dev wget python3 ca-certificates libfl-dev uglifyjs
 
 # approach0 ssh key
 RUN mkdir /root/.ssh/
@@ -45,6 +45,10 @@ RUN cd ~/a0-private && \
 # copy output(s) to special folder for easier distribution later
 RUN mkdir ~/built/ && \
   find . -name \*.out -exec cp {} ~/built/ \;
+
+RUN cd ~/a0-private/demo/web && \
+  chmod +x ./pack.sh && \ 
+  ./pack.sh  
   
 # next stage - start with cloned repository - without the ssh key or unnecessary packages
 FROM run_stage
