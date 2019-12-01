@@ -1,0 +1,1 @@
+docker build -t approach0:latest .
