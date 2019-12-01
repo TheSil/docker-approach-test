@@ -4,7 +4,7 @@ FROM ubuntu:latest as run_stage
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
   apt-get install --no-install-recommends -y \   
-  libevent-dev flex libxml2-dev libopenmpi-dev nginx php-fpm php-curl ssh libfl2 
+  libevent-dev flex libxml2-dev libopenmpi-dev nginx php-fpm php-curl ssh libfl2 tmux openmpi-bin 
   
 FROM run_stage as install_stage
 
@@ -25,7 +25,7 @@ RUN cd ~ && \
   git clone --depth=1 git@github.com:TheSil/a0-private.git
   
 # Download and build Indri
-RUN git clone https://github.com/approach0/fork-indri.git ~/indri
+RUN git clone --depth=1 https://github.com/approach0/fork-indri.git ~/indri
 RUN cd ~/indri && ./configure && make
 
 # Download CppJieba
@@ -59,7 +59,6 @@ RUN rm /etc/nginx/sites-enabled/default && \
   
 COPY --from=install_stage /root/built /usr/bin
 COPY --from=install_stage /root/a0-private/demo/web /var/www/html/
-#COPY --from=install_stage /root/a0-private/indexerd/test-corpus /test-corpus/
 
 ADD start_web.sh /usr/bin
 RUN chmod +x /usr/bin/start_web.sh
