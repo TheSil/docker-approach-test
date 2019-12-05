@@ -1,0 +1,1 @@
+docker build -t approach0_deploy:latest ./deploy/
