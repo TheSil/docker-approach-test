@@ -13,9 +13,3 @@ RUN rm /etc/nginx/sites-enabled/default && \
 ADD ./tmp/built /usr/bin
 ADD ./tmp/web /var/www/html/
 
-#ADD start_web.sh /usr/bin
-#RUN chmod +x /usr/bin/start_web.sh
-#CMD ["start_web.sh"]
-
-
-

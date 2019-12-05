@@ -34,9 +34,9 @@ This will use clean instance of the build image and execute the build script acc
 
 ## Deploy images
 
-Work in progress... Need to make different images for indexer and for search daemon and web. 
+Work in progress... Only running web without the search daemon.
 
-Current (not tested) idea is:
+TODO (not tested) idea is:
 - start web container with network ability to connect to searchd container
 - start indexer container with configurable input (to be able to persist index outside of the container)
 - start search daemon with configurable index input (copy the output from indexer container before if needed)

@@ -1,0 +1,2 @@
+docker stop approach0_web
+docker rm approach0_web
