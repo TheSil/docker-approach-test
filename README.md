@@ -8,7 +8,9 @@ This image can be used as a build environment for Approach0. First you need to m
 
 The build image requires you have an ssh key generated and allowed and stored next to the docker file (since the Approach0 repository is a private one). Such key pair can be generated for example using
 
-`ssh-keygen -q -t rsa -N "" -f ./build/id_rsa`
+``` 
+ssh-keygen -q -t rsa -N "" -f ./build/id_rsa
+```
 
 The actual build image can be made by
 
@@ -18,7 +20,7 @@ docker build -t approach0_build:latest ./build
 
 ## Build Approach0 itself 
 
-You can use the approach0_build image to build the latest Approach0, use/modify the build.sh as required (e.g. link to your fork), and then just execute (for Windows users done by `build_approach.bat`):
+You can use the approach0_build image to build the latest Approach0, use/modify the build.sh as required (e.g. link to your fork), and then just execute (for win users in `build_approach.bat`):
 
 ```
 mkdir .\deploy\tmp
@@ -32,12 +34,30 @@ docker rm approach0_build_cont
 
 This will use clean instance of the build image and execute the build script accordingly, then moving the output of the container and removing it.
 
-## Deploy images
+## Run web container
 
 Work in progress... Only running web without the search daemon.
 
+In order to run the approach web in its container (for win users in `web_start.bat`):
+
+```
+docker create --name approach0_web -p 80:80 approach0_deploy /bin/sh -c "chmod +x /start_web.sh;/start_web.sh;"
+docker cp ./guest/start_web.sh approach0_web:/start_web.sh
+docker start -i approach0_web
+```
+
+Then it should be possible to see the website using http://localhost/
+
+To stop and remove the container (for win users in `web_stop.bat`):
+
+```
+docker stop approach0_web
+docker rm approach0_web
+```
+
+## Run indexer and search daemon containers
+
 TODO (not tested) idea is:
-- start web container with network ability to connect to searchd container
 - start indexer container with configurable input (to be able to persist index outside of the container)
 - start search daemon with configurable index input (copy the output from indexer container before if needed)
 
