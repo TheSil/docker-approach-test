@@ -34,6 +34,14 @@ docker rm approach0_build_cont
 
 This will use clean instance of the build image and execute the build script accordingly, then moving the output of the container and removing it.
 
+
+## Make approach0_deploy:latest
+This image can be used as a deployment environment for Approach0, based on already built Approach0. The image can be made by (for win users in `make_deploy_image.bat`)
+
+``` 
+docker build -t approach0_deploy:latest ./deploy/
+```
+
 ## Run web container
 
 Work in progress... Only running web without the search daemon.
